@@ -1,0 +1,32 @@
+*************** var ******************
+  currentPageN = 1;
+  totalItems: number;
+  options = '';
+  itemLimit = 10;
+  listGoals: any [];
+  counterHidden = false;
+
+  constructor(
+    private dataService: DataService,
+    private router: Router,
+    public dialog: MatDialog,
+  ) {
+  }
+
+
+
+***************** functions *******************  
+getListGoals() {
+    this.options = '?pagination=true' + '&page=' + this.currentPageN + '&order[id]=desc';
+    this.dataService.getCollection(new GoalsModel(), this.options).subscribe((response) => {
+      this.listGoals = response.getMember();
+      this.totalItems = response.getTotalItems();
+      console.log(this.listGoals);
+    });
+
+  }
+
+  onPaginate($page: number) {
+    this.currentPageN = $page;
+    this.getListGoals();
+  }

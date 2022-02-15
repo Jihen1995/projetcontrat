@@ -1,0 +1,156 @@
+<div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="end center" class="position-overlayed-top"
+     style="margin-top: 50px">
+  <div fxFlex.gt-sm="100" fxFlex="100">
+    <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="center start">
+      <div fxFlex.gt-lg="80" fxFlex.gt-md="90" fxFlex.gt-sm="90" fxFlex.gt-xs="90" fxFlex="100">
+        <mat-card class="ma-0">
+          <mat-card-content class="pr-0 pl-0">
+            <form [formGroup]="form">
+
+                <div fxLayout="column">
+
+
+
+                    <div fxLayout="row">
+                      <label class="pa-r-1 font-weight-bold text-align-right" fxFlex.gt-sm="40" fxFlex.gt-xs="35"
+                             fxFlex="20" fxLayout="column" fxLayoutAlign="center flex-end">
+                        <div fxLayout="row">
+                          {{'nom'}}&nbsp;<span class="color-orange">&nbsp;*&nbsp;</span>:
+                        </div>
+                      </label>
+                      <mat-form-field fxFlex.gt-sm="35" fxFlex.gt-xs="45" fxFlex="45">
+                    <textarea matInput placeholder="{{'enter'}}.." [formControl]="form.controls['nom']">
+                    </textarea>
+                      </mat-form-field>
+
+                      <div fxLayout="column">
+                        <small class="error-state error-state-IE-createRole"
+                               *ngIf="form.controls['description'].hasError('required') && form.controls['description'].touched">
+                          {{'you must include a description'}}.</small>
+                      </div>
+                    </div>
+                    <div fxLayout="row">
+                      <label class="pa-r-1 font-weight-bold text-align-right" fxFlex.gt-sm="40" fxFlex.gt-xs="35"
+                             fxFlex="20" fxLayout="column" fxLayoutAlign="center flex-end">
+                        <div fxLayout="row">
+                          {{'users'}}&nbsp;<span class="color-orange">&nbsp;*&nbsp;</span>:
+                        </div>
+                      </label>
+                      <ngx-select
+                        [formControl]="form.controls['users']"
+                        [items]="listUsers"
+                        fxFlex="45"
+                        fxFlex.gt-sm="35"
+                        fxFlex.gt-xs="45"
+                        optionTextField="name"
+                        placeholder="{{'select'}}">
+                      </ngx-select>
+                      <div fxLayout="column">
+                        <small class="error-state error-state-IE-createRole"
+                               *ngIf="form.controls['users'].hasError('required') && form.controls['users'].touched">
+                          {{'you must include a users'}}.</small>
+                      </div>
+                    </div>
+                   
+                    <div fxLayout="row" style="padding-top: 2%">
+                      <label class="pa-r-1 font-weight-bold text-align-right" fxFlex.gt-sm="40" fxFlex.gt-xs="35"
+                             fxFlex="20" fxLayout="column" fxLayoutAlign=" flex-end">
+                        <div >
+                          {{'prenom'}}&nbsp;<span class="color-orange">&nbsp;*&nbsp;</span>:
+                        </div>
+                      </label>
+                      <div fxLayout="row">
+                        <label class="pa-r-1 font-weight-bold text-align-right" fxFlex.gt-sm="40" fxFlex.gt-xs="35"
+                               fxFlex="20" fxLayout="column" fxLayoutAlign="center flex-end">
+                          <div fxLayout="row">
+                            {{'prenom'}}&nbsp;<span class="color-orange">&nbsp;*&nbsp;</span>:
+                          </div>
+                        </label>
+                      </div>
+                     
+
+                    <div fxLayout="row">
+                      <label class="pa-r-1 font-weight-bold text-align-right" fxFlex.gt-sm="40" fxFlex.gt-xs="35"
+                             fxFlex="20" fxLayout="column" fxLayoutAlign="center flex-end">
+                        <div fxLayout="row">
+                          {{'adresse'}}&nbsp;<span class="color-orange">&nbsp;*&nbsp;</span>:
+                        </div>
+                      </label>
+                      <mat-form-field fxFlex.gt-sm="35" fxFlex.gt-xs="45" fxFlex="45">
+                        <input type="number"  matInput placeholder="{{'enter'}}.."
+                               [formControl]="form.controls['adresse']">
+
+                      </mat-form-field>
+
+                      <!--                  <div fxLayout="column">-->
+                      <!--                    <small class="error-state error-state-IE-createRole"-->
+                      <!--                           *ngIf="form.controls['comment'].hasError('required') && form.controls['comment'].touched">-->
+                      <!--                      {{'you must include a comment'}}.</small>-->
+                      <!--                  </div>-->
+                    </div>
+
+                    <div fxLayout="row">
+                      <label class="pa-r-1 font-weight-bold text-align-right" fxFlex.gt-sm="40" fxFlex.gt-xs="35"
+                             fxFlex="20" fxLayout="column" fxLayoutAlign="center flex-end">
+                        <div fxLayout="row">
+                          {{'tel'}}&nbsp;<span class="color-orange">&nbsp;*&nbsp;</span>:
+                        </div>
+                      </label>
+                      <mat-form-field fxFlex.gt-sm="35" fxFlex.gt-xs="45" fxFlex="45">
+                        <input matInput placeholder="{{'enter'}}.." [formControl]="form.controls['tel']">
+
+                      </mat-form-field>
+
+                      <!--                  <div fxLayout="column">-->
+                      <!--                    <small class="error-state error-state-IE-createRole"-->
+                      <!--                           *ngIf="form.controls['comment'].hasError('required') && form.controls['comment'].touched">-->
+                      <!--                      {{'you must include a comment'}}.</small>-->
+                      <!--                  </div>-->
+                    </div>
+                    <div fxLayout="row">
+                      <label class="pa-r-1 font-weight-bold text-align-right" fxFlex.gt-sm="40" fxFlex.gt-xs="35"
+                             fxFlex="20" fxLayout="column" fxLayoutAlign="center flex-end">
+                        <div fxLayout="row">
+                          {{'cin'}}&nbsp;<span class="color-orange">&nbsp;*&nbsp;</span>:
+                        </div>
+                      </label>
+                      <mat-form-field fxFlex.gt-sm="35" fxFlex.gt-xs="45" fxFlex="45">
+                        <input matInput placeholder="{{'enter'}}.." [formControl]="form.controls['cin']">
+
+                      </mat-form-field>
+
+                      <!--                  <div fxLayout="column">-->
+                      <!--                    <small class="error-state error-state-IE-createRole"-->
+                      <!--                           *ngIf="form.controls['comment'].hasError('required') && form.controls['comment'].touched">-->
+                      <!--                      {{'you must include a comment'}}.</small>-->
+                      <!--                  </div>-->
+                    </div>
+
+
+                    
+
+                </div>
+</div>
+            </form>
+
+
+            <mat-card-actions fxLayout="row" style="display: flex; justify-content:space-between">
+              <div>
+              </div>
+              <div fxLayoutAlign="flex-end center" fxLayout="row">
+                <div>
+                  <button (click)=" submit()" class="simple-button custom-mat-orange-500" mat-button
+                          type="submit">{{'save'}}
+                  </button>
+                  <button mat-button class="simple-button mat-grey-400"
+                          (click)="redirect()"> {{'cancel'}}
+                  </button>
+                </div>
+              </div>
+            </mat-card-actions>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

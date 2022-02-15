@@ -1,0 +1,34 @@
+<?php
+// api/src/Controller/CreateOrganizationLogoAction.php
+
+namespace App\Controller;
+
+use App\Entity\Organisation;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+
+final class CreateOrganizationLogoAction 
+{
+   
+    const OPERATION_NAME = 'post_logo';
+
+    const OPERATION_PATH = '/places/{id}/logo';
+
+    /**
+     * @param Request $request
+     *
+     * @return Organisation
+     */
+    public function __invoke(Organisation $data, Request $request): Organisation
+    {
+        $uploadedFile = $request->files->get('logoFile');
+        if (!$uploadedFile) {
+            throw new BadRequestHttpException('"file" is required');
+        }
+
+       
+        $data->updateLogo($uploadedFile);
+
+        return $data;
+    }
+}

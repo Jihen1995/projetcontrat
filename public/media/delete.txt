@@ -1,0 +1,6 @@
+const createIP = new InterestedPartyModel();
+        createIP.setId(row.id);
+        this.dataService.deleteItem(createIP).subscribe(() => {
+          // reload specific dataTable
+    
+        });

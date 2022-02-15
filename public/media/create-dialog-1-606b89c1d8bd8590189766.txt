@@ -1,0 +1,71 @@
+<div mat-dialog-title class="custom-dialog-title custom-dark-blue-50" fxLayout="row" fxLayoutWrap="wrap"
+     fxLayoutAlign="space-between center">
+    <span style="font-size:20px">
+        Add New interested party
+    </span>
+  <button mat-mini-fab [ngStyle]="{'background-color': '#1e88e5'}" (click)="dialogRef.close(false)"><i
+    style="color: #fff" class="material-icons">close</i></button>
+</div>
+  <mat-card >
+    <form [formGroup]="form" xmlns="http://www.w3.org/1999/html">
+      <div class="mat-expansion-custom">
+
+        <mat-card-content class="pr-0 pl-0">
+
+          <div fxLayout="row">
+            <label class="pa-r-1 font-weight-bold text-align-right"
+                   fxFlex.gt-sm="40" fxFlex.gt-xs="35"
+                   fxFlex="20" fxLayout="column" fxLayoutAlign="center flex-end">
+              <div fxLayout="row">
+                {{'description'}}&nbsp;<span class="color-orange">&nbsp;*&nbsp;</span>:
+              </div>
+            </label>
+            <mat-form-field fxFlex.gt-sm="25" fxFlex.gt-xs="35" fxFlex="35">
+              <textarea matInput [formControl]="form.controls['description']">{{form.controls['description'].value}}</textarea>
+            </mat-form-field>
+            <div style="    position: relative; width: 150px">
+              <small *ngIf="form.controls['description'].hasError('required') && form.controls['description'].touched"
+                     style="margin-top: 1%!important;" class="error-state">
+                {{'this field is required'}}
+              </small>
+
+            </div>
+          </div>
+
+          <div fxLayout="row">
+            <label class="pa-r-1 font-weight-bold text-align-right"
+                   fxFlex.gt-sm="40" fxFlex.gt-xs="35"
+                   fxFlex="20" fxLayout="column" fxLayoutAlign="center flex-end">
+              <div fxLayout="row">
+                {{'categorie'}}&nbsp;:
+              </div>
+            </label>
+            <ngx-select
+
+              [formControl]="form.controls['category']"
+              [items]="listCategory"
+              fxFlex.gt-sm="25"
+              fxFlex.gt-xs="35"
+              fxFlex="35"
+              placeholder="{{'select category..'}}..">
+            </ngx-select>
+
+
+          </div>
+        </mat-card-content>
+
+      </div>
+      <mat-card-actions fxLayout="row"
+                        style="display: flex; justify-content:space-between;margin: 1%">
+        <div>
+        </div>
+
+      </mat-card-actions>
+    </form>
+  </mat-card>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Close</button>
+  <button mat-button (click)="submit()" class="simple-button custom-mat-orange-500" type="submit"
+          style="margin: 10px" [mat-dialog-close]="" cdkFocusInitial>Save
+  </button>
+</div>

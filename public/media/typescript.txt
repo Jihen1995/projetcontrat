@@ -1,0 +1,94 @@
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {DataService} from '../../../services/data.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ProcessusModel} from '../../models/processus.model';
+import {InterestedPartyModel} from '../../models/interested-party.model';
+import {Functions} from '../../../common/helpers/functions';
+import {GoalsModel} from '../../models/goals.model';
+import {IssuesModel} from '../../models/Issues.model';
+
+
+@Component({
+  selector: 'app-create-goal',
+  templateUrl: './create-goal.component.html',
+  styleUrls: ['./create-goal.component.css']
+})
+export class CreateGoalComponent implements OnInit {
+  form: FormGroup;
+  listProcessus = [];
+  listIssue = [];
+  nextTwoYear: number;
+  nextYear: number;
+  indicator: any;
+
+  constructor(
+    private router: Router,
+    public fb: FormBuilder,
+    private dataService: DataService,
+  ) {
+    this.form = this.fb.group({
+      description: [null, Validators.required],
+      issue: [null, Validators.required],
+      processus: [null, Validators.required],
+      period: [null, Validators.required],
+      q1: [null],
+      q2: [null],
+      q3: [null],
+      q4: [null],
+      nextYear: [null],
+      nextTwoYear: [null],
+      indicator: [0, Validators.required],
+      goalToReach: [null, Validators.required],
+      currentState: [null, Validators.required],
+      comment: [null],
+
+    });
+  }
+
+  ngOnInit() {
+    this.getListProcessus();
+    this.getListIssues();
+    this.nextTwoYear = (new Date()).getFullYear() + 2;
+    this.nextYear = (new Date()).getFullYear() + 1;
+  }
+
+  getListProcessus() {
+    const options = '?pagination=false';
+    this.dataService.getCollection(new ProcessusModel(), options).subscribe((response) => {
+      this.listProcessus = response.getMember();
+    });
+  }
+
+  async submit() {
+    if (this.form.valid) {
+      const issue = new IssuesModel();
+      const processus = new ProcessusModel();
+      issue.setId(this.form.value.issue);
+      processus.setId(this.form.value.processus);
+
+      this.form.value.issue = '/api/' + issue.getItemUri();
+      this.form.value.processus = '/api/' + processus.getItemUri();
+      console.log(this.form.value);
+      await this.dataService.postItem(new GoalsModel(), null, this.form.value).toPromise();
+      this.redirect();
+    } else {
+      Functions.validateOnSubmit(this.form);
+    }
+  }
+
+  redirect() {
+    this.router.navigate(['list-goals']);
+  }
+
+  private getListIssues() {
+    const options = '?pagination=false';
+    this.dataService.getCollection(new IssuesModel(), options).subscribe((response) => {
+      this.listIssue = response.getMember();
+    });
+  }
+
+  getIndicator() {
+    this.form.controls['indicator'].setValue(this.listProcessus.find(element => element.id === this.form.value.processus).indicator);
+  }
+}
